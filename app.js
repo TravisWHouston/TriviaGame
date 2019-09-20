@@ -32,18 +32,9 @@ let cardMaker = () => {
         document.getElementById(`btn2`).innerHTML = `${questions[count].answer[1]}`
         document.getElementById(`btn3`).innerHTML = `${questions[count].answer[2]}`
         document.getElementById(`btn4`).innerHTML = `${questions[count].answer[3]}`
-
-        correct = questions[count].correct
+        document.getElementById(`pic`).innerHTML = `<img src="./card${count}.jpg">`
         // console.log(correct)
         count++
-        if (count === 11){
-            document.getElementById(`qst`).innerHTML = `${correctAnswers}`
-            document.getElementById(`btn1`).innerHTML = ``
-            document.getElementById(`btn2`).innerHTML = ``
-            document.getElementById(`btn3`).innerHTML = ``
-            document.getElementById(`btn4`).innerHTML = ``
-        }
-        
     }
 
 cardMaker()
@@ -56,9 +47,7 @@ let button = document.addEventListener(`click`, event => {
     }
     if (event.target.className === `btn black`){
     console.log(event.target.innerHTML)
-    if(count < 11){
-        cardMaker()
-    }
+    cardMaker()
     }
 })
 

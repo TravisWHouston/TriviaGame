@@ -33,8 +33,18 @@ let cardMaker = () => {
         document.getElementById(`btn3`).innerHTML = `${questions[count].answer[2]}`
         document.getElementById(`btn4`).innerHTML = `${questions[count].answer[3]}`
         document.getElementById(`pic`).innerHTML = `<img src="./card${count}.jpg">`
-        // console.log(correct)
+        correct = questions[count].correct
+        // console.log(count)
         count++
+        if (count === 10){
+            document.getElementById(`qst`).innerHTML = `${correctAnswers}`
+            document.getElementById(`btn1`).innerHTML = 
+            document.getElementById(`btn2`).innerHTML = ``
+            document.getElementById(`btn3`).innerHTML = ``
+            document.getElementById(`btn4`).innerHTML = ``
+            document.getElementById(`pic`).innerHTML = `<img src="./card0.jpg">`
+        }
+        
     }
 
 cardMaker()

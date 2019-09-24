@@ -1,7 +1,9 @@
-let correctAnswers = 0
+let correctAnswers = ''
 let wrongAnswers = 0
 let count = 0
 let rnd = Math.floor(Math.random() * 4) + 1
+let time = 30
+
 
 const questions = [
     {question:'What year did "Star Wars: Return of the Jedi" get released into theaters?', correct:"1983", 
@@ -24,8 +26,12 @@ const questions = [
     answer:["Elephants", "Penguins", "Lion", "Giraffe"]},
     {question:"What creature supposedly eats Bobba Fett?", correct:"Sarlacc",
     answer:["Dewback", "Varactyl", "Nexu", "Sarlacc"]}]
-
 let correct = questions[count].correct
+
+
+
+
+
 let cardMaker = () => {
         document.getElementById(`qst`).innerHTML = `${questions[count].question}`
         document.getElementById(`btn1`).innerHTML = `${questions[count].answer[0]}`
@@ -33,32 +39,126 @@ let cardMaker = () => {
         document.getElementById(`btn3`).innerHTML = `${questions[count].answer[2]}`
         document.getElementById(`btn4`).innerHTML = `${questions[count].answer[3]}`
         document.getElementById(`pic`).innerHTML = `<img src="./card${count}.jpg">`
+        document.getElementById(`timer`).textContent = time
+        document.getElementById(`right`).textContent = correctAnswers
+        console.log(count)
         correct = questions[count].correct
-        // console.log(count)
-        count++
-        if (count === 10){
-            document.getElementById(`qst`).innerHTML = `${correctAnswers}`
-            document.getElementById(`btn1`).innerHTML = 
-            document.getElementById(`btn2`).innerHTML = ``
-            document.getElementById(`btn3`).innerHTML = ``
-            document.getElementById(`btn4`).innerHTML = ``
-            document.getElementById(`pic`).innerHTML = `<img src="./card0.jpg">`
+        count++   
+    } 
+    let timer = setInterval(function (){
+        time = time - 1
+        document.getElementById(`timer`).textContent = time
+        if (time < 1){
+            cardMaker()
+            wrongAnswers++
+            document.getElementById(`wrong`).textContent = wrongAnswers
+            time = 30
+            
         }
-        
-    }
+    }, 1000)
+    
+    let scoreCard = () => {
+        document.getElementById(`qst`).innerHTML = `
+        <h4>You got ${correctAnswers} right!
+            You got ${wrongAnswers} wrong.
+        </h4>`
+        document.getElementById(`btn1`).remove()
+        document.getElementById(`btn2`).remove()
+        document.getElementById(`btn3`).remove()
+        document.getElementById(`btn4`).remove()
+        clearInterval(timer)
+        let tryAgain = document.createElement(`div`)
+        tryAgain.innerHTML = `<button class="tryAgain">Try again?</button>`
+        document.getElementsByClassName(`card-action`).append(tryAgain)
 
+    }
 cardMaker()
 
-let button = document.addEventListener(`click`, event => {
+document.getElementById(`btn1`).addEventListener(`click`, event => {
     if (event.target.innerHTML === correct){
         console.log(`correct`)
         correctAnswers++
         // console.log(correctAnswers)
     }
-    if (event.target.className === `btn black`){
-    console.log(event.target.innerHTML)
-    cardMaker()
+    if(event.target.innerHTML !== correct){
+        console.log(`wrong`)
+        wrongAnswers++
+        document.getElementById(`wrong`).textContent = wrongAnswers
     }
+    if (event.target.className === `btn black`){
+    time = 30
+    console.log(event.target.innerHTML)
+    if (count < 10){
+        cardMaker()
+        } else {
+            scoreCard()
+        }
+    }
+
 })
+document.getElementById(`btn2`).addEventListener(`click`, event => {
+    if (event.target.innerHTML === correct){
+        console.log(`correct`)
+        correctAnswers++
+        // console.log(correctAnswers)
+    }
+    if(event.target.innerHTML !== correct){
+        console.log(`wrong`)
+        wrongAnswers++
+        document.getElementById(`wrong`).textContent = wrongAnswers
+    }
+    if (event.target.className === `btn black`){
+    time = 30
+    console.log(event.target.innerHTML)
+    if (count < 10){
+        cardMaker()
+        } else {
+            scoreCard()
+        }
+    }
 
+})
+document.getElementById(`btn3`).addEventListener(`click`, event => {
+    if (event.target.innerHTML === correct){
+        console.log(`correct`)
+        correctAnswers++
+        // console.log(correctAnswers)
+    }
+    if(event.target.innerHTML !== correct){
+        console.log(`wrong`)
+        wrongAnswers++
+        document.getElementById(`wrong`).textContent = wrongAnswers
+    }
+    if (event.target.className === `btn black`){
+    time = 30
+    console.log(event.target.innerHTML)
+    if (count < 10){
+        cardMaker()
+        } else {
+            scoreCard()
+        }
+    }
 
+})
+document.getElementById(`btn4`).addEventListener(`click`, event => {
+    if (event.target.innerHTML === correct){
+        console.log(`correct`)
+        correctAnswers++
+        // console.log(correctAnswers)
+    }
+    if(event.target.innerHTML !== correct){
+        console.log(`wrong`)
+        wrongAnswers++
+        document.getElementById(`wrong`).textContent = wrongAnswers
+    }
+    if (event.target.className === `btn black`){
+    time = 30
+    console.log(event.target.innerHTML)
+    if (count < 10){
+    cardMaker()
+    } else {
+        scoreCard()
+    }
+    }
+
+})

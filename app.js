@@ -59,8 +59,7 @@ let cardMaker = () => {
     
     let scoreCard = () => {
         document.getElementById(`qst`).innerHTML = `
-        <h4>You got ${correctAnswers} right!
-            You got ${wrongAnswers} wrong.
+        <h4>You got ${correctAnswers} right and ${wrongAnswers} wrong.
         </h4>`
         document.getElementById(`btn1`).remove()
         document.getElementById(`btn2`).remove()
